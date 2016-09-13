@@ -4,6 +4,11 @@ import com.beverett.derpai.BoardEvaluator;
 
 import junit.framework.TestSuite;
 
+/**
+ * A test file that tests the evaluation function
+ * @author Ben
+ *
+ */
 public class EvaluatorTest extends AITest {
 
 	public static TestSuite suite(){

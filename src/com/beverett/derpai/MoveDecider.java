@@ -82,6 +82,17 @@ public class MoveDecider implements Runnable {
 		state=searchState;
 	}
 	
+	/**
+	 * Searches for the best move using minimax search with alpha-beta pruning
+	 * 
+	 * @param searchState The state to search
+	 * @param depth The current depth that the search is at
+	 * @param parentAlpha The alpha value of the parent for AB pruning. Max moves pass alpha to min moves
+	 * @param parentBeta The beta value of the parent for AB pruning. Min moves pass beta to Max moves
+	 * @param currentPlayer The player number for the player that is moving. For max moves, player==currentPlayer
+	 * @return An action containing the value of the best move
+	 * @throws InterruptedException Used to return once the search time is up
+	 */
 	public Action searchMoves(BoardModel searchState, int depth, int parentAlpha, int parentBeta, byte currentPlayer) throws InterruptedException{
 		Action bestAction=null;
 		int alpha = parentAlpha;
@@ -117,7 +128,6 @@ public class MoveDecider implements Runnable {
 								bestAction=new Action(move, searchAction.getValue());
 								alpha = searchAction.getValue();
 								if(alpha>=beta){
-									//System.out.println("Pruned at depth: "+depth+" with alpha: "+alpha+" and beta: "+beta);
 									return bestAction;
 								}
 							}
@@ -128,7 +138,6 @@ public class MoveDecider implements Runnable {
 								bestAction=new Action(move, searchAction.getValue());
 								beta = searchAction.getValue();
 								if(alpha>=beta){
-									//System.out.println("Pruned at depth: "+depth+" with alpha: "+alpha+" and beta: "+beta);
 									return bestAction;
 								}
 							}
@@ -144,7 +153,7 @@ public class MoveDecider implements Runnable {
 		return bestAction;
 	}
 	
-	/*
+	/**
 	 * Gets all possible moves for the current search state.
 	 * If gravity is on, it searches the top of each row.
 	 * If gravity is off, it searches every space.

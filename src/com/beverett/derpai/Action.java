@@ -5,7 +5,7 @@ import java.awt.Point;
 
 /**
  * @author Ben
- * A POJO that contains an action and its corresponding value
+ * A POJO that contains a move and its corresponding value
  */
 public class Action {
 	private Point move;

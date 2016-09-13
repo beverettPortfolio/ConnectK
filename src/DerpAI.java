@@ -10,6 +10,7 @@ import connectK.BoardModel;
 import connectK.CKPlayer;
 
 /**
+ * The main class for the AI. Extends the provided CKPlayer class.
  * @author Ben
  * 
  */

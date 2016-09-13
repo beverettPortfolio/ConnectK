@@ -4,8 +4,14 @@ import java.awt.Point;
 
 import connectK.BoardModel;
 
+
+/**
+ * A class that evaluates board states
+ * @author Ben
+ *
+ */
 public class BoardEvaluator {
-	/*
+	/**
 	 * The evaluation function for the MiniMax search.
 	 * The Heuristics are:
 	 * Winning rows: A line of k spaces that contains at least one allied piece and no enemy pieces
@@ -14,10 +20,8 @@ public class BoardEvaluator {
 	 * Weights for the heuristics are set at the end
 	 * When gravity is off, even and odd threats are ignored.
 	 * 
-	 * This method is kinda huge, and should probably be in its own class
-	 * 
 	 * @param searchState The BoardModel to be evaluated
-	 * @return An int representing how favorable the board state is. Higher numbers are more favorable for the active player.
+	 * @return An int representing how favorable the board state is. Higher numbers are more favorable for the active player
 	 */
 	public static int evaluate(BoardModel searchState, byte player){
 		int p1Rows=0;
