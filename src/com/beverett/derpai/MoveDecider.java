@@ -101,13 +101,14 @@ public class MoveDecider implements Runnable {
 			throw new InterruptedException();
 		}
 		byte winner = searchState.winner();
+		//Reached the depth limit, or the board is a winning state
+		//Evaluate, return
 		if (depth==currentDepth||winner!=-1){
-			//Evaluate, return
 			int score = BoardEvaluator.evaluate(searchState, player);
 			bestAction = new Action(new Point(), score);
 		}
+		//for each possible move, recur
 		else{
-			//for each possible move, recur
 			if(searchState.hasMovesLeft()){
 				for (Point move: findPossibleMoves(searchState)){
 					if (Thread.interrupted()){
@@ -122,6 +123,8 @@ public class MoveDecider implements Runnable {
 							otherPlayer = 1;
 						}
 						Action searchAction;
+						//MAX move. Finds the move with the largest evaluated score
+						//MAX moves set and pass alpha
 						if (player==currentPlayer){
 							searchAction = searchMoves(searchState.placePiece(move, currentPlayer), depth+1, alpha, Integer.MAX_VALUE, otherPlayer);
 							if (bestAction==null||searchAction.getValue()>bestAction.getValue()){
@@ -132,6 +135,8 @@ public class MoveDecider implements Runnable {
 								}
 							}
 						}
+						//MIN move. Finds the move with the smallest evaluated score
+						//MIN moves set and pass beta
 						else{
 							searchAction = searchMoves(searchState.placePiece(move, currentPlayer), depth+1, Integer.MIN_VALUE, beta, otherPlayer);
 							if (bestAction==null||searchAction.getValue()<bestAction.getValue()){
@@ -145,6 +150,8 @@ public class MoveDecider implements Runnable {
 					}
 				}
 			}
+			//No possible moves
+			//Evaluate, return
 			else{
 				int score = BoardEvaluator.evaluate(searchState, player);
 				return new Action(new Point(-1,-1), score);
@@ -162,6 +169,7 @@ public class MoveDecider implements Runnable {
 	 * @return An array of all possible moves
 	 */
 	public Point[] findPossibleMoves(BoardModel searchState){
+		//Gravity on
 		if (searchState.gravityEnabled()){
 			Point[] moves = new Point[searchState.getWidth()];
 			for (int i=0; i<searchState.getWidth();i++){
@@ -171,6 +179,7 @@ public class MoveDecider implements Runnable {
 			}
 			return moves;
 		}
+		//Gravity off
 		else{
 			ArrayList<Point> moves = new ArrayList<Point>();
 			int width=searchState.getWidth();
