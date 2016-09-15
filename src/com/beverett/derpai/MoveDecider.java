@@ -51,11 +51,9 @@ public class MoveDecider implements Runnable {
 		while(true){
 			try{
 				Action bestMove=searchMoves(state, 0, Integer.MIN_VALUE, Integer.MAX_VALUE, player);
-				//System.out.println(bestMove.getValue());
 				currentBestMove=bestMove;
 				currentDepth++;
 			} catch(InterruptedException e){
-				//System.out.println(currentBestMove.getValue());
 				return;
 			}
 		}
@@ -67,7 +65,6 @@ public class MoveDecider implements Runnable {
 	 * @return The current best move found
 	 */
 	public Point getBestMove(){
-		//System.out.println(currentDepth);
 		return currentBestMove.getMove();
 	}
 	
