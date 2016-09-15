@@ -1,18 +1,18 @@
 package com.beverett.derpai;
 
-
 import java.util.TimerTask;
 
 /**
- * @author Ben
- * A TimerTask for timing the thread that MoveDecider runs on
+ * @author Ben A TimerTask for timing the thread that MoveDecider runs on
  */
-public class MoveTimer extends TimerTask{
+public class MoveTimer extends TimerTask {
 	Thread toInterrupt;
-	
+
 	/**
 	 * Class constructor
-	 * @param toInterrupt The thread to interrupt
+	 * 
+	 * @param toInterrupt
+	 *            The thread to interrupt
 	 */
 	public MoveTimer(Thread toInterrupt) {
 		super();
@@ -23,5 +23,5 @@ public class MoveTimer extends TimerTask{
 	public void run() {
 		toInterrupt.interrupt();
 	}
-	
+
 }
